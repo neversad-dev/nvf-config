@@ -1,0 +1,23 @@
+# Nix build outputs
+result
+result-*
+
+# Nix temporary files
+.direnv/
+
+# Nix flake inputs cache
+.nix-*
+
+# macOS
+.DS_Store
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.temp 
