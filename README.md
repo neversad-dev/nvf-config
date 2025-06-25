@@ -24,7 +24,7 @@ Add this to your `flake.nix`:
 {
   inputs = {
     # ... your other inputs
-    nvf-config.url = "github:yourusername/nvf-config"; # Replace with your repo
+    nvf-config.url = "github:neversad-dev/nvf-config";
   };
 
   outputs = { self, nixpkgs, nvf-config, ... }: {
@@ -48,7 +48,7 @@ Add this to your `flake.nix`:
 ### Standalone
 
 ```bash
-nix run github:yourusername/nvf-config
+nix run github:neversad-dev/nvf-config
 ```
 
 ## Development
