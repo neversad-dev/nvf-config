@@ -36,6 +36,7 @@ Add this to your `flake.nix`:
           home.packages = [
             (nvf-config.lib.neovimConfiguration { 
               system = "aarch64-darwin"; # or your system
+              extraSpecialArgs = { /* optional extra args */ };
             })
           ];
         }
@@ -50,6 +51,58 @@ Add this to your `flake.nix`:
 ```bash
 nix run github:neversad-dev/nvf-config
 ```
+
+### Helper Function (mkNeovim)
+
+For convenience, you can also use the `mkNeovim` helper function:
+
+```nix
+{
+  outputs = { self, nixpkgs, nvf-config, ... }: let
+    # Define your custom lib or other special args
+    mylib = import ./lib { inherit (nixpkgs) lib; };
+  in {
+    homeConfigurations.myuser = home-manager.lib.homeManagerConfiguration {
+      # ... your config
+      modules = [
+        {
+          home.packages = [
+            (nvf-config.lib.mkNeovim "aarch64-darwin" { inherit mylib; })
+          ];
+        }
+      ];
+    };
+  };
+}
+```
+
+## API Reference
+
+### `lib.neovimConfiguration`
+
+The main configuration function with full control:
+
+```nix
+nvf-config.lib.neovimConfiguration {
+  system = "aarch64-darwin";        # Required: target system
+  extraSpecialArgs = {              # Optional: additional special args
+    mylib = /* your lib */;
+    # ... other args
+  };
+}
+```
+
+### `lib.mkNeovim`
+
+Convenience helper function:
+
+```nix
+nvf-config.lib.mkNeovim system extraSpecialArgs
+```
+
+- `system`: Target system (e.g., "aarch64-darwin", "x86_64-linux")
+- `extraSpecialArgs`: Attribute set of additional special arguments
+
 
 ## Development
 
