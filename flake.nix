@@ -38,7 +38,7 @@
         extraSpecialArgs = {inherit mylib;} // extraSpecialArgs;
       }).neovim;
 
-    # Helper function to create Neovim for any system 
+    # Helper function to create Neovim for any system
     lib.mkNeovim = system: extraSpecialArgs:
       self.lib.neovimConfiguration {
         inherit system extraSpecialArgs;
