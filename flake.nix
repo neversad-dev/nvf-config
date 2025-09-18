@@ -24,30 +24,23 @@
     allSystems = builtins.attrValues darwinSystems ++ builtins.attrValues linuxSystems;
     forAllSystems = func: (nixpkgs.lib.genAttrs allSystems func);
 
-    # Helper library functions
+    # Import local lib
     mylib = import ./lib {inherit (nixpkgs) lib;};
   in {
-    # Expose the neovim configuration as a function
-    lib.neovimConfiguration = {
-      system,
-      extraSpecialArgs ? {},
-    }:
-      (nvf.lib.neovimConfiguration {
-        pkgs = nixpkgs.legacyPackages.${system};
-        modules = [./modules];
-        extraSpecialArgs = {inherit mylib;} // extraSpecialArgs;
-      }).neovim;
-
-    # Helper function to create Neovim for any system
-    lib.mkNeovim = system: extraSpecialArgs:
-      self.lib.neovimConfiguration {
-        inherit system extraSpecialArgs;
-      };
-
     # Provide standalone neovim packages for each system
     packages = forAllSystems (system: {
-      default = self.lib.neovimConfiguration {inherit system;};
-      nvim = self.lib.neovimConfiguration {inherit system;};
+      default =
+        (nvf.lib.neovimConfiguration {
+          pkgs = nixpkgs.legacyPackages.${system};
+          modules = [./modules];
+          extraSpecialArgs = {inherit mylib;};
+        }).neovim;
+      nvim =
+        (nvf.lib.neovimConfiguration {
+          pkgs = nixpkgs.legacyPackages.${system};
+          modules = [./modules];
+          extraSpecialArgs = {inherit mylib;};
+        }).neovim;
     });
 
     # Format the nix code in this flake

@@ -102,21 +102,12 @@ nix build .#nvim                          # Build explicit nvim package
 
 ## API & Integration
 
-### Library Functions
+### Package Usage
 
-**`lib.neovimConfiguration`** - Full control function:
+**Direct package access** - Simple and straightforward:
 ```nix
-nvf-config.lib.neovimConfiguration {
-  system = "aarch64-darwin";        # Required: target system
-  extraSpecialArgs = {              # Optional: additional special args
-    mylib = /* your lib */;
-  };
-}
-```
-
-**`lib.mkNeovim`** - Convenience helper:
-```nix
-nvf-config.lib.mkNeovim system extraSpecialArgs
+# Use the pre-built Neovim package for your system
+nvf-config.packages.${system}.default
 ```
 
 ### Usage Patterns
@@ -124,7 +115,7 @@ nvf-config.lib.mkNeovim system extraSpecialArgs
 **As flake input in home-manager**:
 ```nix
 home.packages = [
-  (nvf-config.lib.mkNeovim "aarch64-darwin" { inherit mylib; })
+  nvf-config.packages.${system}.default
 ];
 ```
 
@@ -227,9 +218,10 @@ nix eval .#lib.mkNeovim --apply 'f: f "aarch64-darwin" {}'
 
 ### Framework Integration
 This configuration is built **on top of nvf**, not from scratch:
-- Uses `nvf.lib.neovimConfiguration` as the builder
+- Uses `nvf.lib.neovimConfiguration` internally to build packages
 - Follows nvf's option structure and patterns
 - All available options documented at: https://notashelf.github.io/nvf/options.html
+- **Simplified API**: No complex functions, just use the packages directly
 
 ### System Support
 - **aarch64-darwin**: Apple Silicon Macs

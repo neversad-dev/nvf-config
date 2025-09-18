@@ -34,10 +34,7 @@ Add this to your `flake.nix`:
       modules = [
         {
           home.packages = [
-            (nvf-config.lib.neovimConfiguration { 
-              system = "aarch64-darwin"; # or your system
-              extraSpecialArgs = { /* optional extra args */ };
-            })
+            nvf-config.packages.aarch64-darwin.default
           ];
         }
       ];
@@ -52,56 +49,33 @@ Add this to your `flake.nix`:
 nix run github:neversad-dev/nvf-config
 ```
 
-### Helper Function (mkNeovim)
-
-For convenience, you can also use the `mkNeovim` helper function:
-
-```nix
-{
-  outputs = { self, nixpkgs, nvf-config, ... }: let
-    # Define your custom lib or other special args
-    mylib = import ./lib { inherit (nixpkgs) lib; };
-  in {
-    homeConfigurations.myuser = home-manager.lib.homeManagerConfiguration {
-      # ... your config
-      modules = [
-        {
-          home.packages = [
-            (nvf-config.lib.mkNeovim "aarch64-darwin" { inherit mylib; })
-          ];
-        }
-      ];
-    };
-  };
-}
-```
-
 ## API Reference
 
-### `lib.neovimConfiguration`
+### Packages
 
-The main configuration function with full control:
-
-```nix
-nvf-config.lib.neovimConfiguration {
-  system = "aarch64-darwin";        # Required: target system
-  extraSpecialArgs = {              # Optional: additional special args
-    mylib = /* your lib */;
-    # ... other args
-  };
-}
-```
-
-### `lib.mkNeovim`
-
-Convenience helper function:
+The flake provides pre-built Neovim packages for each supported system:
 
 ```nix
-nvf-config.lib.mkNeovim system extraSpecialArgs
+nvf-config.packages.<system>.default
 ```
 
-- `system`: Target system (e.g., "aarch64-darwin", "x86_64-linux")
-- `extraSpecialArgs`: Attribute set of additional special arguments
+Available systems:
+- `aarch64-darwin` (Apple Silicon macOS)
+- `x86_64-linux` (Linux x86_64)
+
+### Direct Configuration (Advanced)
+
+For advanced use cases, you can use the underlying nvf configuration directly:
+
+```nix
+(nvf-config.lib.neovimConfiguration {
+  pkgs = nixpkgs.legacyPackages.<system>;
+  modules = [./your-modules];
+  extraSpecialArgs = { mylib = import ./lib { inherit (nixpkgs) lib; }; };
+})
+```
+
+Note: The `nvf-config` modules use a local `scanPaths` utility for automatic module discovery, so if you're creating custom modules, you may want to use explicit imports instead.
 
 
 ## Development
