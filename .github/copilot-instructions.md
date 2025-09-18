@@ -204,11 +204,6 @@ nix run . # Manual testing
 
 ### Integration Testing
 Since this is used as a library by other flakes (like nix-config), test integration:
-```bash
-# Test as library function
-nix eval .#lib.mkNeovim --apply 'f: f "aarch64-darwin" {}'
-```
-
 ## Dependencies & Framework
 
 ### Core Dependencies
