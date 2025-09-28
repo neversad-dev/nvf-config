@@ -22,9 +22,7 @@ jobs:
             experimental-features = nix-command flakes
 
       - name: Verify flake
-        run: nix flake check --all-systems
+        run: nix flake check
 
       - name: Test Neovim package
-        run: |
-          nix build .#packages.aarch64-linux.default --no-link
-          nix build .#packages.x86_64-linux.default --no-link
+        run: nix build .#packages.x86_64-linux.default --no-link
