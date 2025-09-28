@@ -4,12 +4,15 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nvf.url = "github:notashelf/nvf";
+    nix-lib = {
+      url = "github:neversad-dev/nix-lib";
+    };
   };
 
   outputs = {
-    self,
     nixpkgs,
     nvf,
+    nix-lib,
     ...
   }: let
     # Define supported systems
@@ -24,8 +27,8 @@
     allSystems = builtins.attrValues darwinSystems ++ builtins.attrValues linuxSystems;
     forAllSystems = func: (nixpkgs.lib.genAttrs allSystems func);
 
-    # Import local lib
-    mylib = import ./lib {inherit (nixpkgs) lib;};
+    # Import shared lib
+    mylib = nix-lib.lib;
   in {
     # Provide standalone neovim packages for each system
     packages = forAllSystems (system: {
