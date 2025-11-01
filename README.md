@@ -70,20 +70,6 @@ Available systems:
 - `aarch64-darwin` (Apple Silicon macOS)
 - `x86_64-linux` (Linux x86_64)
 
-### Direct Configuration (Advanced)
-
-For advanced use cases, you can use the underlying nvf configuration directly:
-
-```nix
-(nvf-config.lib.neovimConfiguration {
-  pkgs = nixpkgs.legacyPackages.<system>;
-  modules = [./your-modules];
-  extraSpecialArgs = { mylib = import ./lib { inherit (nixpkgs) lib; }; };
-})
-```
-
-Note: The `nvf-config` modules use a local `scanPaths` utility for automatic module discovery, so if you're creating custom modules, you may want to use explicit imports instead.
-
 
 ## Development
 
