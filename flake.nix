@@ -2,7 +2,7 @@
   description = "Custom nvf (neovim) configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nvf.url = "github:notashelf/nvf";
     nix-lib = {
       url = "github:neversad-dev/nix-lib";
@@ -26,6 +26,14 @@
 
     allSystems = builtins.attrValues darwinSystems ++ builtins.attrValues linuxSystems;
     forAllSystems = func: (nixpkgs.lib.genAttrs allSystems func);
+    pkgsFor = system:
+      import nixpkgs {
+        inherit system;
+        config = {
+          allowUnfree = true;
+          fetcherVersion = 7;
+        };
+      };
 
     # Import shared lib
     mylib = nix-lib.lib;
@@ -50,5 +58,22 @@
     formatter = forAllSystems (
       system: nixpkgs.legacyPackages.${system}.alejandra
     );
+
+    # Dev shell for working on this nvf config
+    # Packages here are only needed during nvf-config development, not system-wide
+    # Usage: `nix develop`
+    devShells = forAllSystems (system: let
+      pkgs = pkgsFor system;
+    in {
+      default = pkgs.mkShell {
+        name = "nvf-config";
+        packages = with pkgs; [
+          alejandra # nix formatter
+          nix-melt # TUI flake.lock viewer
+          nix-tree # TUI dependency graph for a derivation
+          just # command runner (repo Justfile)
+        ];
+      };
+    });
   };
 }
