@@ -18,7 +18,8 @@ check:
 
 # Format Nix code
 fmt:
-    nix fmt
+    # format the nix files in this repo
+    nix fmt . --accept-flake-config
 
 # Update flake inputs
 up:
