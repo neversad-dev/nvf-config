@@ -21,7 +21,7 @@
       yaml.enable = true;
       toml.enable = true;
       xml.enable = true;
-      docker.enable = true;
+      # docker.enable = true;
       env.enable = true;
       just.enable = true;
     };
