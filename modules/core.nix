@@ -6,10 +6,12 @@
 
     globals = {
       mapleader = " ";
+      localleader = "\\";
     };
 
     spellcheck = {
       enable = true;
+      programmingWordlist.enable = true;
     };
 
     autopairs.nvim-autopairs.enable = true;
