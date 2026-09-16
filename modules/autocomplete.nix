@@ -1,7 +1,7 @@
 {...}: {
   vim = {
     autocomplete = {
-      nvim-cmp = {
+      blink-cmp = {
         enable = true;
       };
     };

@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
     nvf.url = "github:notashelf/nvf";
     nix-lib = {
       url = "github:neversad-dev/nix-lib";
