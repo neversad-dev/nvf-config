@@ -1,11 +1,10 @@
 {pkgs, ...}: {
   vim = {
-    
     extraPackages = with pkgs; [
       ruff
       shellcheck
       clang-tools
-      sqlfluff
+      # sqlfluff
       ktlint
       lua52Packages.luacheck
       markdownlint-cli2
@@ -16,19 +15,20 @@
 
     diagnostics.nvim-lint = {
       enable = true;
-    
+
       linters_by_ft = {
-        python = [ "ruff" ];
-        bash = [ "shellcheck" ];
-        sh = [ "shellcheck" ];
-        c = [ "clangtidy" ];
-        cpp = [ "clangtidy" ];
-        kotlin = [ "ktlint" ];
-        lua = [ "luacheck" ];
-        markdown = [ "markdownlint" ];
-        nix = [ "statix" ];
-        yaml = [ "yamllint" ];
-        dockerfile = [ "hadolint" ];
+        python = ["ruff"];
+        bash = ["shellcheck"];
+        sh = ["shellcheck"];
+        c = ["clangtidy"];
+        cpp = ["clangtidy"];
+        # sql = ["sqlfluff"];
+        kotlin = ["ktlint"];
+        lua = ["luacheck"];
+        markdown = ["markdownlint"];
+        nix = ["statix"];
+        yaml = ["yamllint"];
+        dockerfile = ["hadolint"];
       };
     };
   };

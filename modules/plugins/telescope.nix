@@ -1,23 +1,32 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   vim = {
-    startPlugins = with pkgs.vimPlugins; [
-      telescope-ui-select-nvim
-    ];
-
     telescope = {
       enable = true;
-      setupOpts = {
-        extensions = {
-          "ui-select" = {
-            # This is your opts table
-          };
-        };
-      };
+
+      extensions = [
+        {
+          name = "fzf";
+          packages = [pkgs.vimPlugins.telescope-fzf-native-nvim];
+          setup = {fzf = {fuzzy = true;};};
+        }
+      ];
+
+      # setupOpts = {
+      #   extensions = {
+      #     "ui-select" = {
+      #       # ui-select options
+      #     };
+      #   };
+      # };
     };
 
-    # Load the ui-select extension
-    luaConfigRC.telescope-ui-select = ''
-      require("telescope").load_extension("ui-select")
-    '';
+    # extraPlugins.telescope-ui-select = {
+    #   package = pkgs.vimPlugins.telescope-ui-select-nvim;
+
+    #   setup = ''
+    #     require("telescope").load_extension("ui-select")
+    #   '';
+    # };
   };
 }

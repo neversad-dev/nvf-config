@@ -31,7 +31,6 @@
         setupOpts.presets = {
           command_palette = true;
           long_message_to_split = true;
-          cmdline_output_to_split = true;
         };
       };
       # noice.enable = true;
