@@ -16,10 +16,12 @@ run:
 check:
     nix flake check --all-systems
 
-# Format Nix code
+# Format code across project filetypes (Nix, Markdown, YAML)
 fmt:
-    # format the nix files in this repo
+    # Format Nix files with alejandra
     nix fmt . --accept-flake-config
+    # Format Markdown and YAML files with prettier
+    prettier --write --no-error-on-unmatched-pattern "**/*.md" "**/*.yml" "**/*.yaml"
 
 # Update flake inputs
 up:
