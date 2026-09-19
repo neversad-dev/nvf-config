@@ -25,7 +25,7 @@
         # sql = ["sqlfluff"];
         kotlin = ["ktlint"];
         lua = ["luacheck"];
-        markdown = ["markdownlint"];
+        markdown = ["markdownlint-cli2"];
         nix = ["statix"];
         yaml = ["yamllint"];
         dockerfile = ["hadolint"];
