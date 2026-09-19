@@ -11,6 +11,7 @@
       css.enable = true;
       html.enable = true;
       json.enable = true;
+      typescript.enable = true;
       sql.enable = true;
       java.enable = true;
       kotlin.enable = true;
@@ -60,10 +61,6 @@
           sh = ["shfmt"];
           bash = ["shfmt"];
           python = ["ruff_format"];
-        };
-
-        format_on_save = {
-          timeout_ms = 500;
         };
       };
     };
