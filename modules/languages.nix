@@ -64,5 +64,22 @@
         };
       };
     };
+
+    ui.smartcolumn = {
+      enable = true;
+      setupOpts = {
+        disabled_filetypes = [
+          "help"
+          "text"
+        ];
+        custom_colorcolumn = {
+          # this is a freeform module, it's `buftype = int;` for configuring column position
+          nix = "110";
+          java = "130";
+          kotlin = "130";
+          markdown = "80";
+        };
+      };
+    };
   };
 }
