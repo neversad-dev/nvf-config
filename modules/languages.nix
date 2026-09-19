@@ -16,7 +16,10 @@
       kotlin.enable = true;
       lua.enable = true;
       markdown.enable = true;
-      nix.enable = true;
+      nix = {
+        enable = true;
+        lsp.servers = ["nixd"];
+      };
       python.enable = true;
       yaml.enable = true;
       toml.enable = true;
