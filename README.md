@@ -11,15 +11,15 @@ This repository contains a custom Neovim configuration built using [nvf (neovim 
 
 ## Features
 
-- Language support for Nix, TypeScript, Python, Java, Kotlin, Lua, Bash, and more
-- LSP integration with formatting on save
-- File tree (neo-tree) with `Ctrl+N` shortcut
-- Git integration with gitsigns
-- Telescope for fuzzy finding
-- Terminal integration with toggleterm and lazygit
-- Auto-completion with nvim-cmp
-- Debugging support with nvim-dap
-- Beautiful UI with Catppuccin theme
+- **Language Support**: Comprehensive configuration for Nix (with `nixd`), TypeScript, Python, Java, Kotlin, Lua, Bash, CSS, HTML, SQL, TOML, XML, Markdown, YAML, env, and Just.
+- **LSP & Formatting**: Built-in LSP integration with format-on-save via `conform-nvim` (supporting `alejandra`, `prettier`, `shfmt`, `ruff_format`).
+- **Auto-completion**: Next-generation completion engine powered by `blink-cmp`.
+- **Fuzzy Finding**: Telescope fuzzy finder with native `fzf` extension.
+- **File Explorer**: `neo-tree` file manager with `Ctrl+N` toggle shortcut.
+- **Git Integration**: Inline status signs and blame with `gitsigns`.
+- **Terminal & TUI**: Embedded terminal via `toggleterm` and `lazygit` integration (`<leader>gg`).
+- **UI & Motion**: Modern UI powered by Noice, Fidget (LSP progress), Cinnamon (smooth scrolling), Smartcolumn, Fastaction, and Catppuccin theme.
+- **Debugging**: Integrated DAP debugging engine (`nvim-dap`).
 
 ## Usage
 
@@ -67,20 +67,31 @@ nvf-config.packages.<system>.default
 ```
 
 Available systems:
+
 - `aarch64-darwin` (Apple Silicon macOS)
 - `x86_64-linux` (Linux x86_64)
-
+- `aarch64-linux` (Linux ARM64)
 
 ## Development
 
-To test changes locally:
+### Using Just (Recommended)
+
+This repository includes a `Justfile` for standard tasks:
 
 ```bash
-nix run .
+just build   # Build the Neovim package (.#default)
+just run     # Run Neovim with local configuration
+just check   # Run nix flake check across all systems
+just fmt     # Format Nix code with alejandra
+just up      # Update flake inputs
 ```
 
-To format the code:
+### Using Nix Directly
 
 ```bash
-nix fmt
-``` 
+nix run .              # Run Neovim locally
+nix build .#default    # Build Neovim package
+nix flake check        # Check flake validity
+nix fmt                # Format code
+nix develop            # Enter dev shell with helper tools (alejandra, nix-melt, nix-tree, just)
+```
