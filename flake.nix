@@ -32,7 +32,6 @@
         inherit system;
         config = {
           allowUnfree = true;
-          fetcherVersion = 7;
         };
       };
 
