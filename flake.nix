@@ -69,6 +69,7 @@
         name = "nvf-config";
         packages = with pkgs; [
           alejandra # nix formatter
+          prettier # markdown/yaml/json formatter
           nix-melt # TUI flake.lock viewer
           nix-tree # TUI dependency graph for a derivation
           just # command runner (repo Justfile)
