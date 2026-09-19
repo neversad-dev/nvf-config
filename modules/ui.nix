@@ -1,7 +1,7 @@
 {...}: {
   vim = {
     visuals = {
-      nvim-scrollbar.enable = false; # Shows a scrollbar in the editor
+      nvim-scrollbar.enable = false; # Disables the scrollbar in the editor
       nvim-web-devicons.enable = true; # Adds file type icons to various UI elements
       # Provides smooth scrolling animations
       cinnamon-nvim = {
