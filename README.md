@@ -9,6 +9,8 @@
 
 This repository contains a custom Neovim configuration built using [nvf (neovim flake)](https://github.com/notashelf/nvf).
 
+https://nvf.notashelf.dev/index.html
+
 ## Features
 
 - **Language Support**: Comprehensive configuration for Nix (with `nixd`), TypeScript, Python, Java, Kotlin, Lua, Bash, CSS, HTML, SQL, TOML, XML, Markdown, YAML, env, and Just.
