@@ -46,17 +46,17 @@
       shfmt
       ruff
     ];
-    
+
     formatter.conform-nvim = {
       enable = true;
 
       setupOpts = {
         formatters_by_ft = {
-          nix = [ "alejandra" ];
-          markdown = [ "prettier" ];
-          sh = [ "shfmt" ];
-          bash = [ "shfmt" ];
-          python = [ "ruff_format" ];
+          nix = ["alejandra"];
+          markdown = ["prettier"];
+          sh = ["shfmt"];
+          bash = ["shfmt"];
+          python = ["ruff_format"];
         };
 
         format_on_save = {
@@ -64,7 +64,5 @@
         };
       };
     };
-
-
   };
 }

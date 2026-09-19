@@ -27,7 +27,7 @@
       borders.enable = true;
       noice = {
         enable = true;
-      
+
         setupOpts.presets = {
           command_palette = true;
           long_message_to_split = true;
