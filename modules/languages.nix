@@ -34,7 +34,7 @@
         # Enforce 4 spaces for Java, Kotlin, Python, C/C++, SQL
         event = ["FileType"];
         pattern = ["java" "kotlin" "python" "c" "cpp" "sql"];
-        command = "setlocal shiftwidth=4 tabstop=4 expandtab";
+        command = "setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab";
       }
     ];
 
