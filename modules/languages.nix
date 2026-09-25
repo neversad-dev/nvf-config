@@ -28,7 +28,7 @@
           "bash"
           "sh"
         ];
-        command = "setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab"
+        command = "setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab";
       }
       {
         # Enforce 4 spaces for Java, Kotlin, Python, C/C++, SQL
