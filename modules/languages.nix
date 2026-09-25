@@ -1,6 +1,43 @@
 {pkgs, ...}: {
   vim = {
     visuals.fidget-nvim.enable = true; # Shows LSP progress notifications in the corner
+
+    options = {
+      expandtab = true; # Use spaces instead of tabs
+      shiftwidth = 2; # Size of an indent
+      tabstop = 2; # Number of spaces tabs count for
+      softtabstop = 2;
+    };
+
+    autocmds = [
+      {
+        # Enforce 2 spaces for Nix, Web, and Config languages
+        event = ["FileType"];
+        pattern = [
+          "nix"
+          "css"
+          "html"
+          "json"
+          "javascript"
+          "typescript"
+          "lua"
+          "markdown"
+          "yaml"
+          "toml"
+          "xml"
+          "bash"
+          "sh"
+        ];
+        command = "setlocal shiftwidth=2 tabstop=2 expandtab";
+      }
+      {
+        # Enforce 4 spaces for Java, Kotlin, Python, C/C++, SQL
+        event = ["FileType"];
+        pattern = ["java" "kotlin" "python" "c" "cpp" "sql"];
+        command = "setlocal shiftwidth=4 tabstop=4 expandtab";
+      }
+    ];
+
     languages = {
       enableFormat = true;
       enableTreesitter = true;
