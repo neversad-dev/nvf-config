@@ -14,7 +14,9 @@
         };
         # nvf automatically evaluates this string as Lua code upon plugin load
         setup = ''
-          require('herdr-nvim-nav').setup({})
+          require('herdr-nvim-nav').setup({
+            with_tmux = false
+          })
         '';
       };
     };
