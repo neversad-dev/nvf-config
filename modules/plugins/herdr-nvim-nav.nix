@@ -20,5 +20,43 @@
         '';
       };
     };
+
+    keymaps = [
+      {
+        key = "<C-w>h";
+        mode = "n";
+        action = "<Nop>";
+      }
+      {
+        key = "<C-w>j";
+        mode = "n";
+        action = "<Nop>";
+      }
+      {
+        key = "<C-w>k";
+        mode = "n";
+        action = "<Nop>";
+      }
+      {
+        key = "<C-w>l";
+        mode = "n";
+        action = "<Nop>";
+      }
+    ];
+
+    # Talk directly to which-key v3 to hide them from the UI
+    luaConfigRC.hide_window_movements = ''
+      -- We wrap this in a pcall (protected call) or standard require
+      -- to ensure it only runs if which-key is loaded
+      local wk_ok, wk = pcall(require, "which-key")
+      if wk_ok then
+        wk.add({
+          { "<C-w>h", hidden = true },
+          { "<C-w>j", hidden = true },
+          { "<C-w>k", hidden = true },
+          { "<C-w>l", hidden = true },
+        })
+      end
+    '';
   };
 }
