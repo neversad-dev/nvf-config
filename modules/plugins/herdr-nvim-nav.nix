@@ -48,15 +48,22 @@
     luaConfigRC.hide_window_movements = ''
       -- We wrap this in a pcall (protected call) or standard require
       -- to ensure it only runs if which-key is loaded
-      local wk_ok, wk = pcall(require, "which-key")
-      if wk_ok then
-        wk.add({
-          { "<C-w>h", hidden = true },
-          { "<C-w>j", hidden = true },
-          { "<C-w>k", hidden = true },
-          { "<C-w>l", hidden = true },
-        })
-      end
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "DeferredUIEnter",
+        callback = function()
+          vim.schedule(function()
+            local wk_ok, wk = pcall(require, "which-key")
+            if wk_ok then
+              wk.add({
+                { "<C-w>h", hidden = true },
+                { "<C-w>j", hidden = true },
+                { "<C-w>k", hidden = true },
+                { "<C-w>l", hidden = true },
+              })
+            end
+          end)
+        end,
+      })
     '';
   };
 }
