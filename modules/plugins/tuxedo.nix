@@ -4,6 +4,15 @@
       tuxedo
     ];
 
+    keymaps = [
+      {
+        key = "<leader>tt";
+        mode = "n";
+        silent = true;
+        action = "<cmd>Tuxedo<CR>";
+      }
+    ];
+
     extraPlugins = {
       tuxedo-nvim = {
         package = pkgs.vimUtils.buildVimPlugin {
