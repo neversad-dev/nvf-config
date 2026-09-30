@@ -33,11 +33,16 @@
             height_ratio = 0.80,
           })
 
-          -- Monkey-patch: set TODO_FILE to project-level todo.txt before opening tuxedo
+          -- Monkey-patch: only open tuxedo if project-level todo.txt exists
           local orig = tuxedo.tuxedo
           tuxedo.tuxedo = function()
             local root_dir = vim.fs.root(0, { ".git" }) or vim.fn.getcwd()
-            vim.fn.setenv("TODO_FILE", root_dir .. "/todo.txt")
+            local todo_path = root_dir .. "/todo.txt"
+            if vim.fn.filereadable(todo_path) == 0 then
+              vim.notify("No todo.txt found in " .. root_dir, vim.log.levels.WARN)
+              return
+            end
+            vim.fn.setenv("TODO_FILE", todo_path)
             return orig()
           end
         '';
