@@ -26,11 +26,20 @@
           };
         };
         setup = ''
-          require('tuxedo').setup({
+          local tuxedo = require('tuxedo')
+          tuxedo.setup({
             create_todo_file = true,
             width_ratio = 0.95,
             height_ratio = 0.80,
           })
+
+          -- Monkey-patch: set TODO_FILE to project-level todo.txt before opening tuxedo
+          local orig = tuxedo.tuxedo
+          tuxedo.tuxedo = function()
+            local root_dir = vim.fs.root(0, { ".git" }) or vim.fn.getcwd()
+            vim.fn.setenv("TODO_FILE", root_dir .. "/todo.txt")
+            return orig()
+          end
         '';
       };
     };
